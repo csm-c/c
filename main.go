@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+
+	"github.com/BurntSushi/toml"
 )
 
 const hello_world_c_program = `
@@ -15,6 +17,13 @@ int main(int argc,char* argv[]){
 	return 0;
 }
 `
+
+type Config struct {
+	Name    string
+	Version string
+	Std     string
+	Output  string
+}
 
 // c tool version
 const VERSION = "0.0.4"
@@ -59,7 +68,7 @@ func main() {
 
 			//create project structure
 			createFileWithText(".gitignore", "deps/* \n\n!deps/.gitkeep")
-			createFileWithText("c.toml", fmt.Sprintf("[project]\nname = %v\nversion = 0.0.1\nstd = c11\n\n[dependencies]", getCWD()))
+			createFileWithText("c.toml", fmt.Sprintf("name = \"%v\"\nversion = \"0.0.1\"\nstd = \"c11\"\noutput = \"%v\"\n", getCWD(), getCWD()))
 			createFolder("src")
 			createFileWithText("./src/main.c", hello_world_c_program)
 			createFolder("deps")
@@ -69,6 +78,15 @@ func main() {
 			fmt.Println("created deps/.gitkeep")
 			fmt.Println("created c.toml")
 			fmt.Println("created .gitignore")
+		} else if args[0] == "run" {
+			var config Config
+			if _, err := toml.DecodeFile("c.toml", &config); err != nil {
+				fmt.Println("Internal Error!")
+				os.Exit(1)
+			}
+
+			Run(config.Std, config.Output, args)
+
 		}
 	}
 }
