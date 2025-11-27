@@ -12,6 +12,8 @@ version - prints this tools version.
 
 init - scaffolds new c project in current directory.
 
+run - builds and runs the project (you can pass cli args to 'run' after one space!)
+
 ## Dependencies
 
 - os: linux mint
