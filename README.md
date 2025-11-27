@@ -1,8 +1,8 @@
-c (v0.0.3)
+c (v0.0.4)
 
 A build tool for c (like cargo for rust).
 
-(for linux!)
+(for linux mint!)
 
 ## Status
 
@@ -10,19 +10,17 @@ A build tool for c (like cargo for rust).
 
 version - prints this tools version.
 
-init - creates a new c project in current directory.
-
-run - builds and runs the project (you can pass cli args after run with a space).
+init - scaffolds new c project in current directory.
 
 ## Dependencies
 
-- os: linux
+- os: linux mint
 
 - shell: bash
 
 - compiler: gcc
 
-- git
+- golang 1.25.1 or above
 
 ## Building the project
 
@@ -30,13 +28,9 @@ run - builds and runs the project (you can pass cli args after run with a space)
 
 - Inside project folder that you cloned, run:
 
-  `mkdir build`
+  `go build`
 
-- then:
-
-  `gcc -Wall -Wextra $(find src -name '*.c') -o build/c`
-
-- The binary will be created in build/ directory.
+- The binary will be created in project root.
 
 - After that, just place the output binary where you like and add it to the PATH environment variable.
 
@@ -57,21 +51,6 @@ run - builds and runs the project (you can pass cli args after run with a space)
   To pass cli args:
 
   `c run hello world`
-
-## Generated project structure by init command
-
-### Suppose your project folder is 'hello':
-
-![project-structure](./init-command-generated-project-structure-v0.0.3.png)
-
-Here:
-
-1. src folder - for all c src files (you can nest them in sub-folders).
-2. include folder - for all header files.
-3. lib folder - for all source libraries that are created using c tool.
-   (csm-c library is a util library that is added to lib folder while we create new project using 'init' command!)
-4. build folder - where the output binary will go.
-5. .gitignore - for excluding the build folder from git history.
 
 ## License
 
