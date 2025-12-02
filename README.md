@@ -1,4 +1,8 @@
-c (v0.0.4)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/csm-c/c)
+
+---
+
+# c (v0.0.4)
 
 A build tool for c (like cargo for rust).
 
